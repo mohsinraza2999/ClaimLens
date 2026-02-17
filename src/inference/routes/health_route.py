@@ -8,6 +8,6 @@ health_router = APIRouter(tags=['Health'])
 async def check():
 
     response=HealthResponse(status= "ok",
-                            service= "Generous Tipper Backend",
+                            service= "ClaimLens Backend",
                             timestamp=datetime.utcnow().isoformat() + "Z")
     return response

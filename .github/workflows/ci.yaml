@@ -1,4 +1,4 @@
-name: Video Classifier
+name: ClaimLens
 
 on:
   push:

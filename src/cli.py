@@ -8,7 +8,7 @@ from src.inference.main import app
 
 
 def cli_main():
-    parser = argparse.ArgumentParser(description="Videos Classifier")
+    parser = argparse.ArgumentParser(description="ClaimLens")
     parser.add_argument("command",choices=["process", "train", "route"],
                         help="choose from the following: process, train, and route")
     args=parser.parse_args()

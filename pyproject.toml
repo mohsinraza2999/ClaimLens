@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "Video Classifier"
+name = "ClaimLens"
 version = "0.1.0"
 description = "End-to-end ML project with FastAPI and CI"
 requires-python = ">=3.9"
