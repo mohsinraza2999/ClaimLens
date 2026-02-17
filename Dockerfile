@@ -64,7 +64,7 @@ RUN pip install --no-cache-dir /wheels/* \
     && rm -rf /wheels
 
 COPY artifacts /app/artifacts
-COPY src/api /app/src/api
+COPY src/inference /app/src/inference
 COPY configs /app/configs
 
 # docker environment variable
@@ -76,6 +76,3 @@ USER app
 expose 8000
 
 CMD ["uvicorn","src.inference.main:app", "--host","0.0.0.0", "port", "8000"]
-
-
-
