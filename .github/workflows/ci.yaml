@@ -18,7 +18,7 @@ jobs:
       - name: build test image
         run: |
           docker build \
-           --target test \
+           --target tester \
            --cache-from type=gha \
            --cache-to type=gha,mode=max \
            -t app-test .
