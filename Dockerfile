@@ -41,10 +41,14 @@ COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/*  \
     && rm -rf /wheels
 
-COPY artifacts /app/artifacts
 COPY src /app/src
 COPY data /app/data
 COPY configs /app/configs
+
+# After copying source (This ensures USER app can write there.)
+RUN mkdir -p /artifacts/logs
+RUN mkdir -p /artifacts/models
+RUN mkdir -p /artifacts/results
 
 # docker environment variable
 ENV CONFIG_DIR=/app/configs
@@ -63,9 +67,13 @@ COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/* \
     && rm -rf /wheels
 
-COPY artifacts /app/artifacts
 COPY src/inference /app/src/inference
 COPY configs /app/configs
+
+# After copying source (This ensures USER app can write there.)
+RUN mkdir -p /artifacts/logs
+RUN mkdir -p /artifacts/models
+RUN mkdir -p /artifacts/results
 
 # docker environment variable
 ENV CONFIG_DIR=/app/configs
