@@ -20,7 +20,7 @@ RUN pip wheel --no-cache-dir -w / wheels .
 # testing stage
 from base as tester
 
-COPY --from==builder /wheels /wheels
+COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/*  \
     && pip install --no-cache-dir .[dev] \
     && rm -rf /wheels
@@ -37,7 +37,7 @@ CMD ["pytest", "-q"]
 # trainer stage
 from base as trainer
 
-COPY --from==builder /wheels /wheels
+COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/*  \
     && rm -rf /wheels
 
@@ -58,7 +58,7 @@ from base as production
 
 RUN addgroup --system app && adduser --system --ingroup app app
 
-COPY --from==builder /wheels /wheels
+COPY --from=builder /wheels /wheels
 
 RUN pip install --no-cache-dir /wheels/* \
     && rm -rf /wheels
