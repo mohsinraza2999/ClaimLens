@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # copying pyproject to build wheel
 COPY pyproject.toml /app/
-RUN pip wheel --no-cache-dir -w / wheels .
+RUN pip wheel --no-cache-dir -w /wheels .
 
 # testing stage
 from base as tester
