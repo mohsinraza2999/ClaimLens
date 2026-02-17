@@ -1,0 +1,17 @@
+raw:
+  name: tiktok_dataset.csv
+  path: data/raw/
+processed:
+  name: processed.csv
+  path: data/processed/
+outllier_col: ['video_like_count', 'video_comment_count']
+fearure_engineer:
+  col1:
+    use_cols: []
+  col2:
+    use_cols: []
+
+drop: ['#', 'video_id']
+categorical: ["c_feature1", "c_feature2"]
+vectorizer: ['video_transcription_text']
+numarical: ["n_feature1"]

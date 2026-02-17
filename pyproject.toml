@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Video Classifier"
+version = "0.1.0"
+description = "End-to-end ML project with FastAPI and CI"
+requires-python = ">=3.9"
+
+dependencies = [
+    "scikit-learn==1.6.1",
+    "pandas==2.3.3",
+    "PyYAML==6.0.3",
+    "fastapi==0.124.4",
+    "uvicorn==0.38.0",
+    "xgboost"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest==8.0.1",
+    "httpx",
+]
+
+[tool.setuptools.packages.find]
+where = ["."]

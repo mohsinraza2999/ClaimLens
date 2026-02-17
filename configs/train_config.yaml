@@ -1,0 +1,44 @@
+models: ['xgboost', 'random_forest', 'random_forest']
+data:
+  path: data/processed
+  name: processed.csv
+  target: claim_status
+  test_size: 0.2
+  random_state: 42
+
+tuning:
+  cv: 5
+  n_jobs: -1
+  refit: f1
+  scoring:
+    accuracy: accuracy
+    precision: precision
+    recall: recall
+    f1: f1
+  xgboost:
+    params:
+      model__n_estimators: [100, 300]
+      model__learning_rate: [0.03, 0.04]
+      model__max_depth: [6, 8]
+      model__min_child_weight: [1, 3]
+
+  random_forest:
+    params:
+      model__n_estimators: [100]
+      model__min_samples_split: [4]
+      model__min_samples_leaf: [3]
+      model__max_samples: [0.6]
+      model__max_features: [0.8]
+      model__max_depth: [null]
+  logistic_regression:
+    params:
+      model__C: [0.1, 1, 10]
+# uncomment these and add in data pipeline to fine tune tfidvectorizer hyperparameters
+#tfid_vectorizer:
+  #params:
+    #tfidf__max_features: [20000, 50000]
+    #tfidf__ngram_range: [(1,1), (1,2)]
+    #tfidf__min_df: [3, 5]
+      
+
+model_dir: artifacts
