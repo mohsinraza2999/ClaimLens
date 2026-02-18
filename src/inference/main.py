@@ -6,7 +6,7 @@ from .routes.prediction_route import prediction_router
 def merge_routes()-> FastAPI:
     app = FastAPI(description="An end to end video classifer as opinion or claim base on description",
                title="ClaimLens Project", version="0.1.0")
-    app.include_router(router=health_router, tag=["Health"])
+    app.include_router(router=health_router, tags=["Health"])
     app.include_router(router=prediction_router, tags=["Classifier"])
 
     return app
