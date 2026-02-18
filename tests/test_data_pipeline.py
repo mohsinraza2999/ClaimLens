@@ -18,17 +18,18 @@ def test_read(data_config):
     obj=ReadData(data_config['raw']['path'])
     df =obj.read(data_config['raw']['name'])
 
+    assert df is not None
     assert isinstance(df,pd.DataFrame)
 
 def test_spliter(train_config):
 
     X_train, y_train, X_test, y_test = split_data(train_config['data'])
 
-    assert isinstance(pd.DataFrame,(X_train, X_test, y_train, y_test))
+    assert X_train.__class__ == X_test.__class__ == y_train.__class__ == y_test.__class__==pd.DataFrame
 
 def test_data_pipeline(data_config):
     data_pipeline=load_pipeline(data_config['categorical'],
-                                data_config['numerical'],
+                                data_config['numarical'],
                                 data_config['vectorizer'])
 
     assert data_pipeline is not None

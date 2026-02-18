@@ -29,6 +29,7 @@ RUN pip install --no-cache-dir /wheels/*  \
 COPY src /app/src
 COPY configs /app/configs
 COPY tests /app/tests
+COPY data /app/data
 
 # docker environment variable
 ENV CONFIG_DIR=/app/configs
