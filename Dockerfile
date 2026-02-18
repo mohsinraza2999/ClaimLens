@@ -21,6 +21,7 @@ RUN pip install --upgrade pip \
 # testing stage
 FROM base AS tester
 
+COPY pyproject.toml /app/
 COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/*  \
     && pip install --no-cache-dir .[dev] \
