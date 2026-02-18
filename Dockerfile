@@ -1,11 +1,11 @@
-from python:3.9-slim as base
+FROM python:3.9-slim AS base
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-from base as builder
+FROM base AS builder
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
@@ -19,7 +19,7 @@ RUN pip install --upgrade pip \
     && pip wheel --no-cache-dir -w /wheels .
 
 # testing stage
-from base as tester
+FROM base AS tester
 
 COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/*  \
@@ -36,7 +36,7 @@ ENV LOG_DIR=/app/artifacts/logs
 CMD ["pytest", "-q"]
 
 # trainer stage
-from base as trainer
+FROM base AS trainer
 
 COPY --from=builder /wheels /wheels
 RUN pip install --no-cache-dir /wheels/*  \
@@ -59,7 +59,7 @@ CMD ["python", "src/cli.py", "process"]
 CMD ["python", "src/cli.py", "train"]
 
 # production stage(build backend for model)
-from base as production
+FROM base AS production
 
 RUN addgroup --system app && adduser --system --ingroup app app
 
@@ -82,6 +82,6 @@ ENV LOG_DIR=/app/artifacts/logs
 
 USER app
 
-expose 8000
+EXPOSE 8000
 
 CMD ["uvicorn","src.inference.main:app", "--host","0.0.0.0", "port", "8000"]
