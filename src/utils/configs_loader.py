@@ -5,9 +5,8 @@ import os
 from src.utils.path_validate import path_exist
 
 class Configurations:
-    def __init__(self, CONFIG_PATH:str="configs")->None:
-        if CONFIG_PATH is None:
-            CONFIG_PATH=Path(os.getenv("CONFIG_DIR"),"app/configs")
+    def __init__(self, CONFIG_PATH:Path=Path(os.getenv("CONFIG_DIR"),"configs"))->None:
+        
         self._DATA_CFG=path_exist(CONFIG_PATH / "data_config.yaml")
         self._TRAIN_CFG=path_exist(CONFIG_PATH / "train_config.yaml")
 
